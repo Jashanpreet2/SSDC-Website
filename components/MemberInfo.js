@@ -1,5 +1,8 @@
-import React from 'react'
 
-export default function MemberInfo() {
-  return <div>MemberInfo</div>
+
+export default function MemberInfo(props) {
+  return (
+    <>
+    </>
+  )
 }
