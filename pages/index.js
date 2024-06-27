@@ -1,10 +1,10 @@
-import Head from "next/head";
-import { MDBBtn } from "mdb-react-ui-kit";
-import { Inter } from "next/font/google";
-import Carousel from "@/components/Carousel";
-import LatestPosts from "@/components/LatestPosts";
+import Head from 'next/head'
+import { MDBBtn } from 'mdb-react-ui-kit'
+import { Inter } from 'next/font/google'
+import Carousel from '@/components/Carousel'
+import LatestPosts from '@/components/LatestPosts'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -17,5 +17,5 @@ export default function Home() {
       <Carousel />
       <LatestPosts />
     </>
-  );
+  )
 }

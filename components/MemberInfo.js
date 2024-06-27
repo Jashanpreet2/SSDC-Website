@@ -1,7 +1,5 @@
 import React from 'react'
 
 export default function MemberInfo() {
-  return (
-    <div>MemberInfo</div>
-  )
+  return <div>MemberInfo</div>
 }
