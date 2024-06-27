@@ -1,0 +1,28 @@
+@media (max-width: 991px) {
+    .mt-py-below {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .content-space {
+      margin-top: 24px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .card-image {
+      aspect-ratio: 16 / 9 !important;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+}
+
+.content-space {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+

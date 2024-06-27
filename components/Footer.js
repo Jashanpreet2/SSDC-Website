@@ -9,7 +9,7 @@ import {
     MDBInput,
     MDBTextArea
 } from 'mdb-react-ui-kit';
-  
+
 export default function Footer() {
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -36,7 +36,7 @@ export default function Footer() {
                         <span>Canada</span><br/>
                     </MDBCol>
                     <MDBCol lg='3'></MDBCol>
-                    <MDBCol lg='6'>
+                    <MDBCol lg='6' className='mt-lg-0 mt-md-4'>
                         <form onSubmit={handleSubmit(submitForm)}>
                             <MDBRow className='mb-4'>
                                 <MDBCol>
@@ -59,19 +59,19 @@ export default function Footer() {
             </section>
 
             <section className='mb-4'>
-  
+
                 <MDBBtn outline color="light" floating className='m-1' href='https://x.com/campusgroups' role='button'>
                     <MDBIcon fab icon='twitter' />
                 </MDBBtn>
-    
+
                 <MDBBtn outline color="light" floating className='m-1' href='https://www.instagram.com/seneca_sdc/' role='button'>
                     <MDBIcon fab icon='instagram' />
                 </MDBBtn>
-    
+
                 <MDBBtn outline color="light" floating className='m-1' href='https://www.linkedin.com/company/seneca-software-developers-club/' role='button'>
                     <MDBIcon fab icon='linkedin-in' />
                 </MDBBtn>
-    
+
             </section>
         </MDBContainer>
 
