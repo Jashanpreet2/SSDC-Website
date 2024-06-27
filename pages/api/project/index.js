@@ -1,4 +1,4 @@
-import { getNews, putNews } from "@/lib/dbUtils";
+import { getProjects, postProject } from "@/lib/dbUtils";
 
 export default async function handler(req, res) {
     
@@ -7,12 +7,12 @@ export default async function handler(req, res) {
     try {
         switch (method) {
             case 'GET':
-                let news = await getNews();
-                res.status(200).json(users);
+                let projects = await getProjects();
+                res.status(200).json(projects);
                 break;
             case 'POST':
-                await putNews(req.body);
-                res.status(200).json({ message: `New News Created` });
+                await postProject(req.body);
+                res.status(200).json({ message: `New Project Created` });
                 break;
             default:
                 res.setHeader('Allow', ['GET', 'POST']);
