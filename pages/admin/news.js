@@ -29,7 +29,7 @@ const CreateNewsArticle = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date, content }),
+        body: JSON.stringify({ ...data, date, content, tags: enabledTags }),
       })
 
       if (res.ok) {
@@ -107,7 +107,7 @@ const CreateNewsArticle = () => {
                     id="news"
                     label="News"
                     onChange={(e) => {
-                      setTags({ ...tags, news: !tags.news})
+                      setTags({ ...tags, news: !tags.news })
                     }}
                     checked={tags.news}
                   />

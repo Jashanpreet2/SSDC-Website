@@ -29,7 +29,7 @@ const CreateEvent = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date, content }),
+        body: JSON.stringify({ ...data, date, content, tags: enabledTags }),
       })
 
       if (res.ok) {
