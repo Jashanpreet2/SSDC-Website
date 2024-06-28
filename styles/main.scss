@@ -1,3 +1,8 @@
+@mixin common-img {
+  width: 100%;
+  object-fit: cover;
+}
+
 @media (max-width: 991px) {
   .mt-py-below {
     padding-top: 1.5rem !important;
@@ -9,19 +14,58 @@
     margin-bottom: 24px !important;
   }
 
+  .content-pd-space {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
   .card-image {
     aspect-ratio: 16 / 9 !important;
     border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .profile-image {
+    max-width: 150px;
+  }
+
+  .profile-image-container {
+    display: flex;
+    justify-content: center;
   }
 }
 
 .content-space {
   margin-top: 60px;
-  margin-bottom: 60px;
+}
+
+.content-pd-space {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .card-image {
-  width: 100%;
+  @include common-img;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+}
+
+.profile-image {
+  @include common-img;
+  aspect-ratio: 1 / 1;
+}
+
+.full-width-background {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-on-dark-bg-alt {
+  background-color: rgba(150, 150, 150, 1);
 }
