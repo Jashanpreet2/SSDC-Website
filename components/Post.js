@@ -1,6 +1,5 @@
 import {
   MDBCard,
-  MDBCardImage,
   MDBCardBody,
   MDBCardText,
   MDBCardTitle,
@@ -13,7 +12,7 @@ export default function Post({ title, desc }) {
   return (
     <MDBCard style={{ maxWidth: '600px' }}>
       <MDBRow className="g-0">
-        <MDBCol lg="4" className="d-flex align-items-center py-lg-2 px-lg-3 flex-row-reverse p-0">
+        <MDBCol lg="4" className="d-flex align-items-center p-lg-3 flex-row-reverse p-0">
           <img
             src="https://mdbootstrap.com/img/new/slides/041.webp"
             className="card-image"
