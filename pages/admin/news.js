@@ -11,19 +11,25 @@ import {
 } from 'mdb-react-ui-kit'
 
 const CreateNewsArticle = () => {
-  const { register, handleSubmit, watch, reset } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [date, setDate] = useState('')
+  const [content, setContent] = useState('')
+  const [tags, setTags] = useState({ news: false, update: false })
 
   const submitForm = async (data) => {
-    console.log('Form Submitted', data)
+    let enabledTags = []
+    for (let key in tags) {
+      if (tags[key] == true) enabledTags.push(key)
+    }
+    console.log('Form Submitted', { ...data, date, content, tags: enabledTags })
     try {
       const res = await fetch('/api/news', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date }),
+        body: JSON.stringify({ ...data, date, content }),
       })
 
       if (res.ok) {
@@ -35,8 +41,9 @@ const CreateNewsArticle = () => {
             update: false,
             news: false,
           },
-          content: '',
         })
+        setTags({ news: false, update: false })
+        setContent('')
         setDate('')
         setTimeout(() => setIsSubmitted(false), 3000)
       } else {
@@ -46,8 +53,6 @@ const CreateNewsArticle = () => {
       console.error('An error occurred:', err)
     }
   }
-
-  const watchTags = watch('tags', { update: false, news: false })
 
   return (
     <MDBContainer
@@ -90,8 +95,10 @@ const CreateNewsArticle = () => {
                     name="tags.update"
                     id="update"
                     label="Update"
-                    {...register('tags.update')}
-                    checked={watchTags.update}
+                    onChange={(e) => {
+                      setTags({ ...tags, update: !tags.update })
+                    }}
+                    checked={tags.update}
                   />
                 </div>
                 <div className="mb-2">
@@ -99,8 +106,10 @@ const CreateNewsArticle = () => {
                     name="tags.news"
                     id="news"
                     label="News"
-                    {...register('tags.news')}
-                    checked={watchTags.news}
+                    onChange={(e) => {
+                      setTags({ ...tags, news: !tags.news})
+                    }}
+                    checked={tags.news}
                   />
                 </div>
               </div>
@@ -130,7 +139,11 @@ const CreateNewsArticle = () => {
             id="content"
             labelStyle={{ color: 'white' }}
             style={{ color: 'white', width: '100%' }}
-            {...register('content', { required: true })}
+            onChange={(e) => {
+              setContent(e.target.value)
+            }}
+            value={content}
+            required
             rows={4}
           />
 

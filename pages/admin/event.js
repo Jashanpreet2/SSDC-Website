@@ -10,20 +10,26 @@ import {
   MDBCheckbox,
 } from 'mdb-react-ui-kit'
 
-const CreateNewsArticle = () => {
-  const { register, handleSubmit, watch, reset } = useForm()
+const CreateEvent = () => {
+  const { register, handleSubmit, reset } = useForm()
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [date, setDate] = useState('')
+  const [content, setContent] = useState('')
+  const [tags, setTags] = useState({ hackathon: false, discussion: false })
 
   const submitForm = async (data) => {
-    console.log('Form Submitted', data)
+    let enabledTags = []
+    for (let key in tags) {
+      if (tags[key]) enabledTags.push(key)
+    }
+    console.log('Form Submitted', { ...data, date, content, tags: enabledTags })
     try {
-      const res = await fetch('/api/news', {
+      const res = await fetch('/api/event', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date }),
+        body: JSON.stringify({ ...data, date, content }),
       })
 
       if (res.ok) {
@@ -31,23 +37,18 @@ const CreateNewsArticle = () => {
         reset({
           heading: '',
           author: '',
-          tags: {
-            update: false,
-            news: false,
-          },
-          content: '',
         })
+        setContent('')
         setDate('')
+        setTags({ hackathon: false, discussion: false })
         setTimeout(() => setIsSubmitted(false), 3000)
       } else {
-        console.error('Failed to create news article')
+        console.error('Failed to create event')
       }
     } catch (err) {
       console.error('An error occurred:', err)
     }
   }
-
-  const watchTags = watch('tags', { update: false, news: false })
 
   return (
     <MDBContainer
@@ -58,7 +59,7 @@ const CreateNewsArticle = () => {
         className="rounded-5 w-100 p-5"
         style={{ maxWidth: '650px', backgroundColor: 'black' }}
       >
-        <h1 className="mb-6 text-center">Create a New Event</h1>
+        <h1 className="mb-6 text-center">Create an Event</h1>
 
         <form onSubmit={handleSubmit(submitForm)} style={{ width: '100%', margin: '0 auto' }}>
           <MDBInput
@@ -87,20 +88,23 @@ const CreateNewsArticle = () => {
                 <h5 className="mb-3">Tags</h5>
                 <div className="mb-3">
                   <MDBCheckbox
-                    name="tags.update"
-                    id="update"
-                    label="Update"
-                    {...register('tags.update')}
-                    checked={watchTags.update}
+                    name="tags.hangout"
+                    id="hangout"
+                    label="Hangout"
+                    onChange={(e) => {
+                      setTags({ ...tags, hangout: !tags.hangout })
+                    }}
                   />
                 </div>
                 <div className="mb-2">
                   <MDBCheckbox
-                    name="tags.news"
-                    id="news"
-                    label="News"
-                    {...register('tags.news')}
-                    checked={watchTags.news}
+                    name="tags.hackathon"
+                    id="hackathon"
+                    label="Hackathon"
+                    onChange={(e) => {
+                      setTags({ ...tags, hackathon: !tags.hangout })
+                    }}
+                    checked={tags.hackathon}
                   />
                 </div>
               </div>
@@ -130,7 +134,11 @@ const CreateNewsArticle = () => {
             id="content"
             labelStyle={{ color: 'white' }}
             style={{ color: 'white', width: '100%' }}
-            {...register('content', { required: true })}
+            onChange={(e) => {
+              setContent(e.target.value)
+            }}
+            value={content}
+            required
             rows={4}
           />
 
@@ -147,7 +155,7 @@ const CreateNewsArticle = () => {
 
         {isSubmitted && (
           <div className="mt-4 text-center" style={{ color: 'limegreen' }}>
-            Article successfully submitted!
+            Event successfully submitted!
           </div>
         )}
       </MDBContainer>
@@ -155,4 +163,4 @@ const CreateNewsArticle = () => {
   )
 }
 
-export default CreateNewsArticle
+export default CreateEvent
