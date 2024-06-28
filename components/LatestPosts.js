@@ -5,7 +5,7 @@ import SectionHeader from './SectionHeader'
 export default function LatestPosts() {
   return (
     <div className="mt-py-below py-5">
-      <SectionHeader title="Latest Posts" subtitle="Stay updated with our blogs and tutorials"/>
+      <SectionHeader title="Latest Posts" subtitle="Stay updated with our blogs and tutorials" />
       <MDBContainer className="content-space">
         <MDBRow>
           <MDBCol size="md-6">

@@ -55,15 +55,14 @@
 .card-style {
   @include common-card;
   max-width: 600px;
-  border: 1px solid rgba(0, 0, 0, 0.1)!important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 .review-style {
   @include common-card;
   padding: 1rem;
-  background:rgba(242,242,242);
+  background: rgba(242, 242, 242);
   color: black;
 }
-
 
 .profile-image {
   @include common-img;
