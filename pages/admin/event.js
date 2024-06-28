@@ -148,7 +148,7 @@ const CreateEvent = () => {
               type="submit"
               style={{ fontSize: '1rem', padding: '0.5rem 3rem', textTransform: 'none' }}
             >
-              Add Article
+              Add Event
             </MDBBtn>
           </div>
         </form>
