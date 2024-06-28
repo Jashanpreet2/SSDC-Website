@@ -1,3 +1,4 @@
+import { mongooseConnect } from "@/lib/dbUtils";
 import { getReviewById, putReviewById, deleteReviewById } from "@/lib/dbUtils";
 
 export default async function handler(req, res) {
@@ -5,6 +6,8 @@ export default async function handler(req, res) {
     const { method } = req;
 
     try {
+        await mongooseConnect();
+        
         switch (method) {
             case 'GET':
                 let review = await getReviewById(id);

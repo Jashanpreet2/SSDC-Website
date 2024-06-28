@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import {
   MDBFooter,
   MDBContainer,
@@ -8,7 +8,8 @@ import {
   MDBBtn,
   MDBInput,
   MDBTextArea,
-} from 'mdb-react-ui-kit'
+} from 'mdb-react-ui-kit';
+import ChatBotToggler from './ChatBotToggler';
 
 export default function Footer() {
   const {
@@ -26,8 +27,9 @@ export default function Footer() {
   const submitForm = (data) => {}
 
   return (
-    <MDBFooter className="bg-dark text-white">
-      <MDBContainer className="p-4" fluid>
+    <MDBFooter>
+      <ChatBotToggler/>
+      <MDBContainer className="p-4 bg-dark text-white" fluid>
         <section className="">
           <MDBRow>
             <MDBCol lg="3">
