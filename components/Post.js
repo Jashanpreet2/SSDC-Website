@@ -1,11 +1,4 @@
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardText,
-  MDBCardTitle,
-  MDBRow,
-  MDBCol,
-} from 'mdb-react-ui-kit'
+import { MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBRow, MDBCol } from 'mdb-react-ui-kit'
 import Image from 'next/image'
 
 export default function Post({ title, desc }) {
