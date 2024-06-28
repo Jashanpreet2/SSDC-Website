@@ -3,6 +3,7 @@ import { MDBBtn } from 'mdb-react-ui-kit'
 import { Inter } from 'next/font/google'
 import Carousel from '@/components/Carousel'
 import LatestPosts from '@/components/LatestPosts'
+import Profile from '@/components/Profile'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Carousel />
+      <Profile />
       <LatestPosts />
     </>
   )
