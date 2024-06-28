@@ -1,15 +1,11 @@
 import { MDBTypography, MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit'
 import Post from './Post'
+import SectionHeader from './SectionHeader'
 
 export default function LatestPosts() {
   return (
     <div className="mt-py-below py-5">
-      <MDBTypography tag="h2" className="text-center">
-        Latest Posts
-      </MDBTypography>
-      <MDBTypography tag="h4" className="text-center">
-        Stay updated with our blogs and tutorials
-      </MDBTypography>
+      <SectionHeader title="Latest Posts" subtitle="Stay updated with our blogs and tutorials" />
       <MDBContainer className="content-space">
         <MDBRow>
           <MDBCol size="md-6">

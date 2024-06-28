@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Carousel from '@/components/Carousel'
 import LatestPosts from '@/components/LatestPosts'
 import Profile from '@/components/Profile'
+import Reviews from '@/components/Reviews'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default function Home() {
       <Carousel />
       <Profile />
       <LatestPosts />
+      <Reviews />
     </>
   )
 }

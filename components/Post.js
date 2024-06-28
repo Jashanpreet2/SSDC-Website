@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function Post({ title, desc }) {
   return (
-    <MDBCard style={{ maxWidth: '600px' }}>
+    <MDBCard className="card-style">
       <MDBRow className="g-0">
         <MDBCol lg="4" className="d-flex align-items-center p-lg-3 flex-row-reverse p-0">
           <img

@@ -3,6 +3,10 @@
   object-fit: cover;
 }
 
+@mixin common-card {
+  box-shadow: none !important;
+}
+
 @media (max-width: 991px) {
   .mt-py-below {
     padding-top: 1.5rem !important;
@@ -48,9 +52,27 @@
   aspect-ratio: 1 / 1;
 }
 
+.card-style {
+  @include common-card;
+  max-width: 600px;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+.review-style {
+  @include common-card;
+  padding: 1rem;
+  background: rgba(242, 242, 242);
+  color: black;
+}
+
 .profile-image {
   @include common-img;
   aspect-ratio: 1 / 1;
+}
+
+.review-image {
+  @include common-img;
+  aspect-ratio: 1 / 1;
+  width: 58px;
 }
 
 .full-width-background {
