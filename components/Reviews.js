@@ -2,39 +2,39 @@ import { MDBTypography, MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit'
 import Post from './Post'
 import SectionHeader from './SectionHeader'
 import Review from './Review'
+import ReviewList from './ReviewList'
+import ViewMoreButton from './ViewMoreButton'
 
 export default function Reviews() {
+  const reviews = [
+    {
+      id: 1,
+      name: 'Jane Smith',
+      review: 'Great community and learning resources',
+      star: 5,
+      imgSrc: 'https://mdbootstrap.com/img/new/slides/041.webp',
+    },
+    {
+      id: 2,
+      name: 'John Doe',
+      review: 'Excellent tutorials and support',
+      star: 3,
+      imgSrc: 'https://mdbootstrap.com/img/new/slides/041.webp',
+    },
+    {
+      id: 8,
+      name: 'James Anderson',
+      review: 'Fantastic platform for learning',
+      star: 2,
+      imgSrc: 'https://mdbootstrap.com/img/new/slides/041.webp',
+    },
+  ]
   return (
     <div className="mt-py-below py-5">
       <SectionHeader title="Member Reviews" />
-      <MDBContainer className="content-space">
-        <MDBRow className="row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          <MDBCol>
-            <Review
-              name="Jane Smith"
-              img="https://mdbootstrap.com/img/new/slides/041.webp"
-              star="2"
-              review="Great community and learning resources"
-            />
-          </MDBCol>
-          <MDBCol>
-            <Review
-              name="Alex Johnson"
-              img="https://mdbootstrap.com/img/new/slides/041.webp"
-              star="5"
-              review="Exciting events and collaborative projects"
-            />
-          </MDBCol>
-          <MDBCol>
-            <Review
-              name="Anthony Darlington"
-              img="https://mdbootstrap.com/img/new/slides/041.webp"
-              star="2"
-              review="test test test test test test test"
-            />
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+      <div className="content-space">
+        <ReviewList reviews={reviews} linkTo="/review" />
+      </div>
     </div>
   )
 }
