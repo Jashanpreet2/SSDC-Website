@@ -40,7 +40,7 @@ export default function NewsList({ news }) {
   return (
     <div className="d-flex flex-column align-items-center mt-4 pb-4">
       {getData().map((content) => (
-        <NewsCard {...content} />
+        <NewsCard key={content.id} {...content} />
       ))}
 
       <Pagination

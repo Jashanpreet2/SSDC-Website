@@ -9,9 +9,8 @@ import {
 
 export default function NewsCard({ id, title, date, author, desc }) {
   return (
-    <MDBCard className="news-card-style mb-4" key={id}>
+    <MDBCard className="news-card-style mb-4">
       <MDBCardBody>
-        <span>key:{id}</span>
         <MDBCardTitle className="fw-bold">{title}</MDBCardTitle>
         <MDBCardSubTitle className="text-dark">written by {author}</MDBCardSubTitle>
         <MDBCardText className="my-2">{desc}</MDBCardText>
