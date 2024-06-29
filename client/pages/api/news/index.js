@@ -1,5 +1,4 @@
-import { mongooseConnect } from "@/lib/dbUtils";
-import { getNews, postNews } from "@/lib/dbUtils";
+import { mongooseConnect, getNews, postNews } from "@/lib/dbUtils";
 
 export default async function handler(req, res) {
 
