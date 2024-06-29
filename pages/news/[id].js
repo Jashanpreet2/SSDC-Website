@@ -16,7 +16,8 @@ export default function Event() {
     author: 'Lisa Adams',
     desc: 'Join us for a night of networking and fun. Meet fellow members and industry professionals in a relaxed setting.',
     date: '2024-06-30',
-    content: 'Expand your horizons with the International Relations Club. Dive into global issues, diplomacy, and cultural exchange through discussions, simulations, and guest speakers. Join us as we explore current events and promote understanding and cooperation among students.'
+    content:
+      'Expand your horizons with the International Relations Club. Dive into global issues, diplomacy, and cultural exchange through discussions, simulations, and guest speakers. Join us as we explore current events and promote understanding and cooperation among students.',
   }
   return (
     <>
@@ -24,10 +25,10 @@ export default function Event() {
         <title>{news.title}</title>
       </Head>
       <Hero
-          imgUrl="https://via.placeholder.com/1000"
-          action=""
-          head={news.title}
-          subHead={`written by ${news.author}`}
+        imgUrl="https://via.placeholder.com/1000"
+        action=""
+        head={news.title}
+        subHead={`written by ${news.author}`}
       />
 
       <MDBContainer fluid className="p-0">
@@ -46,7 +47,7 @@ export default function Event() {
             <span>{news.date}</span>
           </div>
 
-          <div className="d-flex flex-column align-items-center mt-5 mb-8">
+          <div className="d-flex flex-column align-items-center mb-8 mt-5">
             <Link href="/news" passHref>
               <MDBBtn
                 color="dark"
