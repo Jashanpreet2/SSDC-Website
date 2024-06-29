@@ -5,29 +5,20 @@ import Link from 'next/link'
 import { MDBContainer, MDBIcon, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
 import Hero from '@/components/Hero'
 import IconList from '@/components/IconList'
+import { formatDate } from '@/lib/dateUtils'
 
-export default function Event() {
+export default function Event({news}) {
   const router = useRouter()
-  const { id } = router.query
-
-  const news = {
-    id: 7,
-    title: 'Club Social Event: Networking Night',
-    author: 'Lisa Adams',
-    desc: 'Join us for a night of networking and fun. Meet fellow members and industry professionals in a relaxed setting.',
-    date: '2024-06-30',
-    content:
-      'Expand your horizons with the International Relations Club. Dive into global issues, diplomacy, and cultural exchange through discussions, simulations, and guest speakers. Join us as we explore current events and promote understanding and cooperation among students.',
-  }
+  const formattedDate = formatDate(news.date);
   return (
     <>
       <Head>
-        <title>{news.title}</title>
+        <title>{news.heading}</title>
       </Head>
       <Hero
         imgUrl="https://via.placeholder.com/1000"
         action=""
-        head={news.title}
+        head={news.heading}
         subHead={`written by ${news.author}`}
       />
 
@@ -44,7 +35,7 @@ export default function Event() {
             className="rounded-9 mx-auto mb-10 border border-gray-300 p-3"
             style={{ maxWidth: '250px', textAlign: 'center', backgroundColor: '#D9D9D9' }}
           >
-            <span>{news.date}</span>
+            <span>Date: {formattedDate}</span>
           </div>
 
           <div className="d-flex flex-column align-items-center mb-8 mt-5">
@@ -69,4 +60,21 @@ export default function Event() {
       <IconList />
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+
+    const {id} = context.params;
+    const res = await fetch(`${process.env.API_ENDPOINT}/api/news/${id}`);
+    const news = await res.json();
+
+    if (!news) {
+        return {
+          notFound: true,
+        }
+      }
+  
+    return {
+        props: { news },
+    };
 }

@@ -24,6 +24,8 @@ export default function NewsList({ news }) {
     }
     setCurrentPage(page)
     setStart(startPage)
+
+    window.scrollTo(0, 0);
   }, [router.query.page])
 
   const handlePageChange = (pageNum) => {
@@ -39,7 +41,7 @@ export default function NewsList({ news }) {
   return (
     <div className="d-flex flex-column align-items-center mt-4 pb-4">
       {getData().map((content) => (
-        <NewsCard key={content.id} {...content} />
+        <NewsCard key={content._id} {...content} />
       ))}
 
       <Pagination

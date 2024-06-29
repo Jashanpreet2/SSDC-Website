@@ -2,7 +2,7 @@ import { mongooseConnect } from "@/lib/dbUtils";
 import { getNews, postNews } from "@/lib/dbUtils";
 
 export default async function handler(req, res) {
-    
+
     const { method } = req;
 
     try {
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         switch (method) {
             case 'GET':
                 let news = await getNews();
-                res.status(200).json(users);
+                res.status(200).json(news);
                 break;
             case 'POST':
                 await postNews(req.body);
