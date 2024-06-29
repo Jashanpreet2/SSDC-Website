@@ -7,7 +7,6 @@ export default function Pagination({ startPage, currentPage, total, onPageChange
       <MDBPagination className="mb-0">
         <MDBPaginationItem disabled={currentPage === 1}>
           <MDBPaginationLink
-            // href={`/news${currentPage - 1 !== 0 ? `/?page=${currentPage - 1}` : ''}`}
             tabIndex={currentPage === 1 ? -1 : undefined}
             aria-disabled={currentPage === 1}
             onClick={() => onPageChange(currentPage - 1)}
