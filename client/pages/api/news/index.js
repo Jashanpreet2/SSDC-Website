@@ -2,7 +2,7 @@ import { mongooseConnect } from "@/lib/dbUtils";
 import { getNews, postNews } from "@/lib/dbUtils";
 
 export default async function handler(req, res) {
-    
+
     const { method } = req;
 
     console.log(req.body);

@@ -11,9 +11,11 @@ export default function Hero({ imgUrl, url, head, subHead, action }) {
           <div className="text-white">
             <h1 className="mb-3">{head}</h1>
             <h4 className="mb-3">{subHead}</h4>
-            <MDBBtn tag="a" outline size="lg" href={url}>
-              {action}
-            </MDBBtn>
+            {action && (
+              <MDBBtn tag="a" outline size="lg" href={url}>
+                {action}
+              </MDBBtn>
+            )}
           </div>
         </div>
       </div>
