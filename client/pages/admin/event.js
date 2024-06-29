@@ -12,10 +12,10 @@ import {
 
 const CreateEvent = () => {
   const { register, handleSubmit, reset } = useForm()
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [date, setDate] = useState('')
-  const [content, setContent] = useState('')
-  const [tags, setTags] = useState({ hackathon: false, discussion: false })
+  const [ isSubmitted, setIsSubmitted ] = useState(false)
+  const [ date, setDate ] = useState('')
+  const [ content, setContent ] = useState('')
+  const [tags, setTags] = useState({ hangout: false, hackathon: false })
 
   const submitForm = async (data) => {
     let enabledTags = []
@@ -40,7 +40,7 @@ const CreateEvent = () => {
         })
         setContent('')
         setDate('')
-        setTags({ hackathon: false, discussion: false })
+        setTags({ hangout: false, hackathon: false })
         setTimeout(() => setIsSubmitted(false), 3000)
       } else {
         console.error('Failed to create event')
@@ -92,8 +92,9 @@ const CreateEvent = () => {
                     id="hangout"
                     label="Hangout"
                     onChange={(e) => {
-                      setTags({ ...tags, hangout: !tags.hangout })
+                      setTags({ hangout: e.target.checked, hackathon: false })
                     }}
+                    checked={tags.hangout}
                   />
                 </div>
                 <div className="mb-2">
@@ -102,7 +103,7 @@ const CreateEvent = () => {
                     id="hackathon"
                     label="Hackathon"
                     onChange={(e) => {
-                      setTags({ ...tags, hackathon: !tags.hangout })
+                      setTags({ hangout: false, hackathon: e.target.checked })
                     }}
                     checked={tags.hackathon}
                   />

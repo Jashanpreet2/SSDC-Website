@@ -5,6 +5,7 @@ export default async function handler(req, res) {
 
     const { method } = req;
 
+    console.log(req.body);
     try {
         await mongooseConnect();
 
