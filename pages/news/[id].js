@@ -7,9 +7,9 @@ import Hero from '@/components/Hero'
 import IconList from '@/components/IconList'
 import { formatDate } from '@/lib/dateUtils'
 
-export default function Event({news}) {
+export default function Event({ news }) {
   const router = useRouter()
-  const formattedDate = formatDate(news.date);
+  const formattedDate = formatDate(news.date)
   return (
     <>
       <Head>
@@ -63,18 +63,17 @@ export default function Event({news}) {
 }
 
 export async function getServerSideProps(context) {
+  const { id } = context.params
+  const res = await fetch(`${process.env.API_ENDPOINT}/api/news/${id}`)
+  const news = await res.json()
 
-    const {id} = context.params;
-    const res = await fetch(`${process.env.API_ENDPOINT}/api/news/${id}`);
-    const news = await res.json();
-
-    if (!news) {
-        return {
-          notFound: true,
-        }
-      }
-  
+  if (!news) {
     return {
-        props: { news },
-    };
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { news },
+  }
 }

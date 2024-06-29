@@ -9,7 +9,7 @@ import {
 import { formatDate } from '@/lib/dateUtils'
 
 export default function NewsCard({ _id, heading, date, author, content }) {
-  const formattedDate = formatDate(date);
+  const formattedDate = formatDate(date)
   return (
     <MDBCard className="news-card-style mb-4">
       <MDBCardBody>

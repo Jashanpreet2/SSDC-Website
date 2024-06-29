@@ -2,7 +2,7 @@ import Head from 'next/head'
 import NewsList from '@/components/NewsList'
 import IconList from '@/components/IconList'
 
-export default function News({news}) {
+export default function News({ news }) {
   return (
     <>
       <Head>
@@ -23,16 +23,16 @@ export default function News({news}) {
 }
 
 export async function getServerSideProps() {
-    const res = await fetch(`${process.env.API_ENDPOINT}/api/news`);
-    const news = await res.json();
+  const res = await fetch(`${process.env.API_ENDPOINT}/api/news`)
+  const news = await res.json()
 
-    if (!news) {
-        return {
-          notFound: true,
-        }
-      }
-
+  if (!news) {
     return {
-        props: { news },
-    };
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { news },
+  }
 }

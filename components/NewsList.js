@@ -25,7 +25,7 @@ export default function NewsList({ news }) {
     setCurrentPage(page)
     setStart(startPage)
 
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }, [router.query.page])
 
   const handlePageChange = (pageNum) => {
