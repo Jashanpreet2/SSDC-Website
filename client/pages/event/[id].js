@@ -1,30 +1,43 @@
-// pages/event/[id].js
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { MDBContainer, MDBIcon, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
+import { useState, useEffect } from 'react'
 
 export default function Event() {
   const router = useRouter()
   const { id } = router.query
+  const [event, setEvent] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  // Dummy data for a single event
-  const event = {
-    id: id,
-    heading: 'Event Name 1',
-    author: 'Author 1',
-    tags: {
-      update: true,
-      news: false,
-    },
-    content: 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit esse cillum dolore fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum',
-    date: '2023-07-01',
+  useEffect(() => {
+    if (id) {
+      setLoading(true)
+      fetch(`/api/event/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setEvent(data)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.error('Error fetching event:', error)
+          setLoading(false)
+        })
+    }
+  }, [id])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (!event) {
+    return <div>Event not found</div>
   }
 
   return (
     <>
       <Head>
-        <title>{event.name}</title>
+        <title>{event.heading}</title>
       </Head>
 
       <MDBContainer fluid className="p-0">
@@ -40,14 +53,11 @@ export default function Event() {
             <h1 className="mb-4 text-center">{event.heading}</h1>
             <p className="text-muted mb-4 text-center">by {event.author}</p>
             <div className="mb-4">
-              {Object.entries(event.tags).map(
-                ([key, value]) =>
-                  value && (
-                    <MDBBtn key={key} color="dark" size="sm" className="me-2">
-                      {key}
-                    </MDBBtn>
-                  )
-              )}
+              {event.tags.map((tag) => (
+                <MDBBtn key={tag} color="dark" size="sm" className="me-2">
+                  {tag}
+                </MDBBtn>
+              ))}
             </div>
           </div>
 
@@ -62,10 +72,10 @@ export default function Event() {
             className="rounded-9 mx-auto mb-10 border border-gray-300 p-3"
             style={{ maxWidth: '250px', textAlign: 'center', backgroundColor: '#D9D9D9' }}
           >
-            <span>{event.date}</span>
+            <span>{new Date(event.date).toLocaleDateString()}</span>
           </div>
 
-          <div className="d-flex flex-column align-items-center mt-5 mb-8">
+          <div className="d-flex flex-column align-items-center mb-8 mt-5">
             <h3>Upcoming Events</h3>
             <p>Join us for exciting new events</p>
             <Link href="/events" passHref>
