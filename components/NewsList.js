@@ -27,7 +27,6 @@ export default function NewsList({ news }) {
   }, [router.query.page])
 
   const handlePageChange = (pageNum) => {
-    console.log('hi')
     router.push(`/news/?page=${pageNum}`, undefined, { shallow: true })
   }
 
