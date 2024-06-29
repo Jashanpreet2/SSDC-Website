@@ -78,7 +78,7 @@ export default function Footer() {
                     )}
                   </MDBCol>
                 </MDBRow>
-                <MDBTextArea
+                <MDBInput
                   className="mb-4"
                   label="Message"
                   contrast

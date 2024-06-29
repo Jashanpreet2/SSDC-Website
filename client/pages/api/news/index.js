@@ -5,13 +5,14 @@ export default async function handler(req, res) {
     
     const { method } = req;
 
+    console.log(req.body);
     try {
         await mongooseConnect();
 
         switch (method) {
             case 'GET':
                 let news = await getNews();
-                res.status(200).json(users);
+                res.status(200).json(news);
                 break;
             case 'POST':
                 await postNews(req.body);

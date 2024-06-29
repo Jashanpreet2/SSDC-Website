@@ -18,19 +18,21 @@ import {
 } from 'mdb-react-ui-kit'
 
 export default function ChatBotToggler() {
+  const chatbotUrl = 'http://127.0.0.1:5000'
   const [chats, setChats] = useState([])
   const [ques, setQues] = useState('')
   const [scrollableModal, setScrollableModal] = useState(false)
 
-  const manageChat = () => {
+  const manageChat = async () => {
     if (ques) {
       let userChat = {
         msg: ques,
         ifUser: true,
       }
-      /* Chatbot Data */
+      let resp = await fetch(`${chatbotUrl}?query=${ques}`)
+      let chatbotResponse = await resp.text()
       let chatBotChat = {
-        msg: '',
+        msg: chatbotResponse,
         ifUser: false,
       }
       setChats([...chats, userChat, chatBotChat])
