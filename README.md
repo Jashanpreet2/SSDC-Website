@@ -1,8 +1,8 @@
 # Getting started
 
-## 1. Install and run Llama3 with Ollama.
+## 1. Install and run phi3:mini with Ollama.
 Download Ollama from here https://github.com/ollama/ollama?tab=readme-ov-file
-Then start it in command prompt using "ollama run llama3"
+Then start the LLM phi3:mini in command prompt using "ollama run phi3:mini"
 
 ## 2. Setup virtual environment for the chatbot with the dependencies
 Navigate to chatbot folder
