@@ -1,5 +1,6 @@
 import { mongooseConnect } from "@/lib/dbUtils";
-import { getEvents, postEvent } from "@/lib/dbUtils";
+import { getUpcomingEvents, postEvent } from "@/lib/dbUtils";
+import { formatDate } from "@/lib/dateUtils";
 
 export default async function handler(req, res) {
     
@@ -10,7 +11,8 @@ export default async function handler(req, res) {
         
         switch (method) {
             case 'GET':
-                let events = await getEvents();
+                let currentDate = formatDate((new Date()).toLocaleDateString());
+                let events = await getUpcomingEvents(currentDate);
                 res.status(200).json(events);
                 break;
             case 'POST':

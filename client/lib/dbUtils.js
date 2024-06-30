@@ -77,8 +77,8 @@ export function getNewsById(id) {
   return News.findOne({ _id: id }).exec()
 }
 
-export function getEvents() {
-  return Event.find().exec()
+export function getUpcomingEvents(currentDate) {
+  return Event.find({date: {$gte: currentDate}}).exec()
 }
 
 export function getEventById(id) {
