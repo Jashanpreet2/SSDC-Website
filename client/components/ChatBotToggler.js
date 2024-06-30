@@ -112,6 +112,7 @@ export default function ChatBotToggler() {
                     placeholder="Message"
                     type="text"
                     onChange={(e) => setQues(e.target.value)}
+                    onKeyDown={(e)=>e.key=="Enter" && manageChat()}
                   />
                   <MDBBtn onClick={manageChat} style={{ backgroundColor: '#ef4444' }}>
                     Send
