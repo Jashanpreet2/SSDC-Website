@@ -11,7 +11,6 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter,
   MDBInputGroup,
   MDBCard,
   MDBCardBody,
@@ -19,7 +18,9 @@ import {
 
 export default function ChatBotToggler() {
   const chatbotUrl = 'http://127.0.0.1:5000'
-  const [chats, setChats] = useState([])
+  const [chats, setChats] = useState([
+    { msg: 'Hello, how can I assist you today?', ifUser: false },
+  ])
   const [ques, setQues] = useState('')
   const [scrollableModal, setScrollableModal] = useState(false)
 
@@ -72,69 +73,52 @@ export default function ChatBotToggler() {
       <MDBModal open={scrollableModal} onClose={() => setScrollableModal(false)} tabIndex="-1">
         <MDBModalDialog scrollable>
           <MDBModalContent>
-            <MDBModalHeader>
-              <MDBModalTitle>DevClub Chatbot</MDBModalTitle>
+            <MDBModalHeader style={{ backgroundColor: '#1C0F13', color: 'white' }}>
+              <MDBModalTitle>DevClub ChatBot</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
                 onClick={() => setScrollableModal(false)}
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>
-              <MDBContainer fluid className="py-5" style={{ backgroundColor: '#eee' }}>
-                <MDBRow className="d-flex justify-content-center">
-                  <MDBCol md="10" lg="8" xl="6">
-                    <MDBCard id="chat2" style={{ borderRadius: '15px' }}>
-                      <MDBCardBody>
-                        {chats.map((chat, idx) => {
-                          //console.log(chat.msg);
-                          if (chat.ifUser) {
-                            return (
-                              <div key={idx} className="d-flex justify-content-end flex-row">
-                                <div>
-                                  <p className="small rounded-3 bg-primary mb-1 me-3 p-2 text-white">
-                                    {chat.msg}
-                                  </p>
-                                </div>
-                              </div>
-                            )
-                          } else {
-                            return (
-                              <div key={idx} className="d-flex justify-content-start mb-4 flex-row">
-                                <div>
-                                  <p
-                                    className="small rounded-3 mb-1 ms-3 p-2"
-                                    style={{ backgroundColor: '#f5f6f7' }}
-                                  >
-                                    {chat.msg}
-                                  </p>
-                                </div>
-                              </div>
-                            )
-                          }
-                        })}
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol>
-                </MDBRow>
-              </MDBContainer>
+            <MDBModalBody className="p-0">
+              <MDBCard style={{ borderRadius: '0' }}>
+                <MDBCardBody style={{ height: '400px', overflowY: 'auto' }}>
+                  {chats.map((chat, idx) => (
+                    <div
+                      key={idx}
+                      className={`d-flex ${chat.ifUser ? 'justify-content-end' : 'justify-content-start'} mb-2`}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: chat.ifUser ? '#ef4444' : '#e0e0e0',
+                          color: chat.ifUser ? 'white' : 'black',
+                          borderRadius: '10px',
+                          padding: '8px 12px',
+                          maxWidth: '70%',
+                        }}
+                      >
+                        {chat.msg}
+                      </div>
+                    </div>
+                  ))}
+                </MDBCardBody>
+              </MDBCard>
+              <div className="p-3">
+                <MDBInputGroup>
+                  <input
+                    className="form-control"
+                    value={ques}
+                    placeholder="Message"
+                    type="text"
+                    onChange={(e) => setQues(e.target.value)}
+                  />
+                  <MDBBtn onClick={manageChat} style={{ backgroundColor: '#ef4444' }}>
+                    Send
+                  </MDBBtn>
+                </MDBInputGroup>
+              </div>
             </MDBModalBody>
-            <MDBModalFooter>
-              <MDBInputGroup className="mb-3">
-                <input
-                  className="form-control"
-                  value={ques}
-                  placeholder="Question"
-                  type="text"
-                  onChange={(e) => {
-                    setQues(e.target.value)
-                  }}
-                />
-                <MDBBtn outline onClick={manageChat}>
-                  Send
-                </MDBBtn>
-              </MDBInputGroup>
-            </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
