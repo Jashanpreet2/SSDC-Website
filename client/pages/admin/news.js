@@ -37,14 +37,10 @@ const CreateNewsArticle = () => {
         reset({
           heading: '',
           author: '',
-          tags: {
-            update: false,
-            news: false,
-          },
         })
-        setTags({ news: false, update: false })
         setContent('')
         setDate('')
+        setTags({ news: false, update: false })
         setTimeout(() => setIsSubmitted(false), 3000)
       } else {
         console.error('Failed to create news article')
@@ -96,7 +92,7 @@ const CreateNewsArticle = () => {
                     id="update"
                     label="Update"
                     onChange={(e) => {
-                      setTags({ ...tags, update: !tags.update })
+                      setTags({ update: e.target.checked, news: false })
                     }}
                     checked={tags.update}
                   />
@@ -107,7 +103,7 @@ const CreateNewsArticle = () => {
                     id="news"
                     label="News"
                     onChange={(e) => {
-                      setTags({ ...tags, news: !tags.news })
+                      setTags({ update: false, news: e.target.checked })
                     }}
                     checked={tags.news}
                   />
