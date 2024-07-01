@@ -18,6 +18,7 @@ const EventCard = ({ event }) => {
           src={event.imageUrl || `https://picsum.photos/300/200?random=${event._id}`}
           position="top"
           alt={event.heading}
+          style={{ width: '300px', height: '200px' }}
         />
         <MDBCardBody>
           <MDBCardTitle>{event.heading}</MDBCardTitle>
