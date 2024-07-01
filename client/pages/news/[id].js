@@ -7,7 +7,7 @@ import Hero from '@/components/Hero'
 import IconList from '@/components/IconList'
 import { formatDate } from '@/lib/dateUtils'
 
-export default function Event({ news }) {
+export default function News({ news }) {
   const router = useRouter()
   const formattedDate = formatDate(news.date)
   return (
