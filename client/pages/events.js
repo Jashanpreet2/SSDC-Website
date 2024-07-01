@@ -11,7 +11,6 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBBtn,
-  MDBIcon,
   MDBDropdown,
   MDBDropdownMenu,
   MDBDropdownToggle,
@@ -67,17 +66,13 @@ export default function Events() {
       <Head>
         <title>Discover our events</title>
       </Head>
-      <MDBContainer fluid className="p-0">
-        <div
-          className="d-flex justify-content-center align-items-center mb-5"
-          style={{
-            height: '400px',
-            backgroundColor: '#D9D9D9',
-            width: '100%',
-          }}
-        >
-          <h1 className="mb-5 text-center">&quot;Discover our events&quot;</h1>
+      <div className="full-width-section mb-6" style={{backgroundImage:
+            'url("https://www.senecapolytechnic.ca/content/seneca/futurestudents/events-and-webinars/_jcr_content/root/responsivegrid/pre-content/top_feature_copy/1.img.Open-House-Newnham-2022-11-26-085.jpg")'}}>
+        <div className="overlay">
+          <h1 className="text-center text-white">&quot;Discover our events&quot;</h1>
         </div>
+      </div>
+      <MDBContainer fluid className="p-0">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2>Upcoming Events ...</h2>
           <MDBDropdown>
@@ -102,7 +97,7 @@ export default function Events() {
             <MDBCol key={event._id}>
               <MDBCard>
                 <MDBCardImage
-                  src="https://via.placeholder.com/300x200"
+                  src={event.imageUrl || `https://picsum.photos/300/200?random=${event._id}`}
                   position="top"
                   alt={event.heading}
                 />
