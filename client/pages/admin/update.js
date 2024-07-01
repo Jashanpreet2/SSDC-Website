@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import {
   MDBContainer,
@@ -14,6 +15,9 @@ import {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function UpdateForm() {
+    const searchParams = useSearchParams();
+    const type = searchParams.get('type')
+    const id = searchParams.get('id')
     const router = useRouter();
     console.log(router);
 
@@ -24,7 +28,7 @@ export default function UpdateForm() {
         console.log(data);
     };
 
-    return (
+    return (type && id)?(
         <MDBContainer
             fluid
             className="d-flex justify-content-center align-items-center vh-100 text-white"
@@ -115,5 +119,5 @@ export default function UpdateForm() {
                 </form>
             </MDBContainer>
         </MDBContainer>
-    );
+    ):"Please wait";
 }
