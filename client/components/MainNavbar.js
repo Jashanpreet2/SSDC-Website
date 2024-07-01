@@ -14,6 +14,7 @@ import {
 import Hero from './Hero'
 
 export default function MainNavbar({ currentPage }) {
+  console.log(currentPage)
   const [openNav, setOpenNav] = useState(false)
 
   return (
