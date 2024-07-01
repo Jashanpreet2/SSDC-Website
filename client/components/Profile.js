@@ -1,4 +1,5 @@
 import { MDBFooter, MDBContainer, MDBCol, MDBRow, MDBBtn } from 'mdb-react-ui-kit'
+import Image from 'next/image'
 
 export default function Profile(props) {
   return (
@@ -6,10 +7,12 @@ export default function Profile(props) {
       <MDBContainer>
         <MDBRow className="align-items-center justify-content-center justify-content-lg-between">
           <MDBCol size="12" lg="2" className="profile-image-container">
-            <img
-              src="https://mdbootstrap.com/img/new/slides/041.webp"
-              className="profile-image rounded-circle"
+            <Image
+              src='/president.jpeg'
+              className="rounded-circle"
               alt="..."
+              height="100"
+              width="100"
             />
           </MDBCol>
           <MDBCol
@@ -17,8 +20,8 @@ export default function Profile(props) {
             lg="6"
             className="d-flex flex-column align-items-lg-start align-items-center"
           >
-            <span className="fs-5 fw-bold mt-lg-0 mt-2">John Doe</span>
-            <span className="mt-lg-2 badge text-on-dark-bg-alt text-dark mt-1">president</span>
+            <span className="fs-5 fw-bold mt-lg-0 mt-2">Pratham Garg</span>
+            <span className="mt-lg-2 badge text-on-dark-bg-alt text-dark mt-1">President</span>
             <span className="mt-lg-2 mt-1">Passionate about creating innovative solutions</span>
           </MDBCol>
           <MDBCol size="auto" lg="2" className="mt-lg-0 mt-5">
