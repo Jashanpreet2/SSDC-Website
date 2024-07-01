@@ -11,7 +11,7 @@ import {
 } from 'mdb-react-ui-kit'
 
 const CreateEvent = () => {
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm()
   const [ isSubmitted, setIsSubmitted ] = useState(false)
   const [ date, setDate ] = useState('')
   const [ content, setContent ] = useState('')
@@ -64,6 +64,7 @@ const CreateEvent = () => {
         <h1 className="mb-6 text-center">Create an Event</h1>
 
         <form onSubmit={handleSubmit(submitForm)} style={{ width: '100%', margin: '0 auto' }}>
+          {errors.heading && <p style={{ color: 'red', marginBottom: '0' }}>Heading is required</p>}
           <MDBInput
             className="mb-4"
             label="Heading"
@@ -74,6 +75,7 @@ const CreateEvent = () => {
             {...register('heading', { required: true })}
           />
 
+          {errors.author && <p style={{ color: 'red', marginBottom: '0' }}>Author is required</p>}
           <MDBInput
             className="mb-4"
             label="Author"

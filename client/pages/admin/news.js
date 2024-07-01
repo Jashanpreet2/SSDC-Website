@@ -11,12 +11,11 @@ import {
 } from 'mdb-react-ui-kit'
 
 const CreateNewsArticle = () => {
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm()
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [date, setDate] = useState('')
   const [content, setContent] = useState('')
   const [tags, setTags] = useState({ news: false, update: false })
-  const [imageUrl, setImageUrl] = useState('')
 
   const submitForm = async (data) => {
     let enabledTags = []
@@ -30,7 +29,7 @@ const CreateNewsArticle = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date, content, tags: enabledTags, imageUrl }),
+        body: JSON.stringify({ ...data, date, content, tags: enabledTags }),
       })
 
       if (res.ok) {
@@ -64,6 +63,7 @@ const CreateNewsArticle = () => {
         <h1 className="mb-6 text-center">Create a News Article</h1>
 
         <form onSubmit={handleSubmit(submitForm)} style={{ width: '100%', margin: '0 auto' }}>
+          {errors.heading && <p style={{ color: 'red', marginBottom: '0' }}>Heading is required</p>}
           <MDBInput
             className="mb-4"
             label="Heading"
@@ -74,6 +74,7 @@ const CreateNewsArticle = () => {
             {...register('heading', { required: true })}
           />
 
+          {errors.author && <p style={{ color: 'red', marginBottom: '0' }}>Author is required</p>}
           <MDBInput
             className="mb-4"
             label="Author"

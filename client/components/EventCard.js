@@ -13,11 +13,12 @@ import {
 const EventCard = ({ event }) => {
   return (
     <MDBCol key={event._id}>
-      <MDBCard>
+      <MDBCard style={{ maxWidth: '300px' }}>
         <MDBCardImage
           src={event.imageUrl || `https://picsum.photos/300/200?random=${event._id}`}
           position="top"
           alt={event.heading}
+          style={{ width: '300px', height: '200px' }}
         />
         <MDBCardBody>
           <MDBCardTitle>{event.heading}</MDBCardTitle>
