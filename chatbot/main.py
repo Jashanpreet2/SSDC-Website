@@ -73,7 +73,7 @@ class Bot:
     parameters:
         model: The locally installed Ollama model's name that you want to connect to
     """
-    def __init__(self, model="llama3"):
+    def __init__(self, model="phi3:mini"):
         # Creating the retrieval chain
         llm = Ollama(model="phi3:mini")
         output_parser = StrOutputParser()
