@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import {
   MDBContainer,
   MDBNavbar,
@@ -13,8 +14,10 @@ import {
 } from 'mdb-react-ui-kit'
 import Hero from './Hero'
 
-export default function MainNavbar({ currentPage }) {
-  console.log(currentPage)
+export default function MainNavbar() {
+  const router = useRouter()
+  const pathname = router.pathname
+  console.log(pathname)
   const [openNav, setOpenNav] = useState(false)
 
   return (
@@ -35,17 +38,17 @@ export default function MainNavbar({ currentPage }) {
           <MDBCollapse navbar open={openNav}>
             <MDBNavbarNav>
               <MDBNavbarItem>
-                <MDBNavbarLink active={currentPage == 'Home'} aria-current="page" href="/">
+                <MDBNavbarLink active={pathname == '/'} aria-current="page" href="/">
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink active={currentPage == 'Events'} href="/events">
+                <MDBNavbarLink active={pathname == '/events'} href="/events">
                   Events
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/news">News</MDBNavbarLink>
+                <MDBNavbarLink active={pathname == '/news'} href="/news">News</MDBNavbarLink>
               </MDBNavbarItem>
               {/* <MDBNavbarItem>
                 <MDBNavbarLink href="/projects">Projects</MDBNavbarLink>
@@ -54,7 +57,7 @@ export default function MainNavbar({ currentPage }) {
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
-      {currentPage == 'Home' && (
+      {pathname == '/' && (
         <Hero
           imgUrl="https://mdbootstrap.com/img/new/slides/041.webp"
           action="Join Now"
@@ -62,7 +65,7 @@ export default function MainNavbar({ currentPage }) {
           subHead="Explore the world of coding and collaboration"
         />
       )}
-      {currentPage == 'News' && (
+      {pathname == '/news' && (
         <Hero
           imgUrl="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           action=""
@@ -70,7 +73,7 @@ export default function MainNavbar({ currentPage }) {
           subHead="Stay updated with the latest news from our club."
         />
       )}
-      {currentPage == 'Events' && (
+      {pathname == '/events' && (
         <Hero
           imgUrl="https://www.senecapolytechnic.ca/content/seneca/futurestudents/events-and-webinars/_jcr_content/root/responsivegrid/pre-content/top_feature_copy/1.img.Open-House-Newnham-2022-11-26-085.jpg"
           action=""
