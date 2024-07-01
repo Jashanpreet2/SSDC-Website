@@ -40,27 +40,26 @@ export default function Event() {
         <title>{event.heading}</title>
       </Head>
 
+      <div
+        className="full-width-section mb-6"
+        style={{
+          backgroundImage: `url(${event.imageUrl || `https://picsum.photos/1000/400?random=${event._id}`})`,
+        }}
+      >
+        <div className="overlay">
+          <h1 className="mb-4 text-center text-white">{event.heading}</h1>
+          <p className="mb-4 text-center text-white">by {event.author}</p>
+          <div className="mb-4">
+            {event.tags.map((tag) => (
+              <MDBBtn key={tag} color="dark" size="sm" className="me-2">
+                {tag}
+              </MDBBtn>
+            ))}
+          </div>
+        </div>
+      </div>
       <MDBContainer fluid className="p-0">
         <MDBCol md="8" className="w-100">
-          <div
-            className="d-flex flex-column justify-content-center align-items-center mb-5"
-            style={{
-              height: '400px',
-              backgroundColor: '#D9D9D9',
-              width: '100%',
-            }}
-          >
-            <h1 className="mb-4 text-center">{event.heading}</h1>
-            <p className="text-muted mb-4 text-center">by {event.author}</p>
-            <div className="mb-4">
-              {event.tags.map((tag) => (
-                <MDBBtn key={tag} color="dark" size="sm" className="me-2">
-                  {tag}
-                </MDBBtn>
-              ))}
-            </div>
-          </div>
-
           <div
             className="rounded-9 d-flex justify-content-center align-items-center mb-4 border border-gray-300 bg-white px-5 py-4"
             style={{ minHeight: '400px' }}
@@ -96,9 +95,7 @@ export default function Event() {
           </div>
         </MDBCol>
       </MDBContainer>
-
       <hr />
-
       <footer className="mt-5 text-center">
         <p>Follow us to learn more</p>
         <div>
