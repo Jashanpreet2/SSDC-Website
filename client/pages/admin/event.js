@@ -16,7 +16,6 @@ const CreateEvent = () => {
   const [ date, setDate ] = useState('')
   const [ content, setContent ] = useState('')
   const [tags, setTags] = useState({ hangout: false, hackathon: false })
-  const [imageUrl, setImageUrl] = useState('')
 
   const submitForm = async (data) => {
     let enabledTags = []
@@ -30,7 +29,7 @@ const CreateEvent = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date, content, tags: enabledTags, imageUrl }),
+        body: JSON.stringify({ ...data, date, content, tags: enabledTags }),
       })
 
       if (res.ok) {
