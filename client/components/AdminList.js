@@ -32,7 +32,7 @@ export default function AdminList({type = 'event'}) {
         <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {data?.map((ele) => (
-                    <MDBCol>
+                    <MDBCol key={ele._id}>
                         <MDBCard style={{ maxWidth: '540px' }}>
                             <MDBRow className='g-0'>
                                 <MDBCol md='4'>
