@@ -14,8 +14,9 @@ export default async function handler(req, res) {
                 res.status(200).json(news);
                 break;
             case 'PUT':
+                console.log(req.body);
                 await putNewsById(id, req.body);
-                res.status(200).json({ message: `News Updated` });
+                res.status(200).end();
                 break;
             case 'DELETE':
                 await deleteNewsById(id);

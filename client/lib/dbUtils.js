@@ -138,7 +138,7 @@ export function postReview(data) {
 }
 
 export function putNewsById(id, data) {
-  return News.updateOne({ _id: id }, { $set: { ...data } }).exec()
+  return News.updateOne({ _id: id }, { $set: { ...data }}).exec()
 }
 
 export function putEventById(id, data) {

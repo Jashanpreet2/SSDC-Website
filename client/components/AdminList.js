@@ -22,7 +22,7 @@ export default function AdminList({type = 'event'}) {
     const deleteCurrentData = async (id) => {
         try {
             await fetch(`/api/${type}/${id}`, {method: 'DELETE'});
-            router.refresh();
+            router.reload();
         } catch(err) {
             console.error('An error occurred:', err);
         }

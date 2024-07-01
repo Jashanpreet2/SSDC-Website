@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import {
   MDBContainer,
@@ -16,19 +16,53 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function UpdateForm() {
     const searchParams = useSearchParams();
-    const type = searchParams.get('type')
-    const id = searchParams.get('id')
+    const type = searchParams.get('type');
+    const id = searchParams.get('id');
     const router = useRouter();
-    console.log(router);
 
     const {data, error} = useSWR(`/api/${type}/${id}`, fetcher);
-    const { register, handleSubmit, reset } = useForm();
+    const [ heading, setHeading ] = useState('');
+    const [ author, setAuthor ] = useState('');
+    const [ content, setContent ] = useState('');
+    const [ date, setDate ] = useState('');
+    const [ tags, setTags ] = useState([]);
 
-    const submitForm = (data) => {
-        console.log(data);
+    useEffect(() => {
+        setContent(data?.content);
+        setTags(data?.tags.map(ele => ({name: ele, checked: true })));
+        setDate(data?.date);
+        setHeading(data?.heading);
+        setAuthor(data?.author);
+    }, [data]);
+
+    const submitForm = async (e) => {
+        e.preventDefault();
+        const newTags = tags.map(({name, checked}) => {
+            if (checked) {
+                return name;
+            }
+        });
+        console.log(newTags);
+        try {
+            const res = await fetch(`/api/${type}/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    heading, author, date, content,  tags: newTags
+                })
+            });
+            if (res.ok) {
+                console.log('data-updated');
+                router.push('/admin/');
+            }
+        } catch (err) {
+            console.error('error occurred ', err);
+        } 
     };
 
-    return (type && id)?(
+    return (type && id && data)?(
         <MDBContainer
             fluid
             className="d-flex justify-content-center align-items-center vh-100 text-white"
@@ -39,16 +73,17 @@ export default function UpdateForm() {
             >
                 <h1 className="mb-6 text-center">Update {type.charAt(0).toUpperCase() + type.substring(1)}</h1>
         
-                <form onSubmit={handleSubmit(submitForm)} style={{ width: '100%', margin: '0 auto' }}>
+                <form onSubmit={(e) => { submitForm(e) }} style={{ width: '100%', margin: '0 auto' }}>
                     <MDBInput
                         className="mb-4"
                         label="Heading"
                         id="heading"
                         type="text"
-                        value={data?.heading}
+                        value={heading}
+                        onChange={(e) => {setHeading(e.target.value)}}
                         labelStyle={{ color: 'white' }}
                         style={{ color: 'white', width: '100%' }}
-                        {...register('heading', { required: true })}
+                        required
                     />
         
                     <MDBInput
@@ -56,23 +91,30 @@ export default function UpdateForm() {
                         label="Author"
                         id="author"
                         type="text"
-                        value={data?.author}
+                        value={author}
+                        onChange={(e) => {setAuthor(e.target.value)}}
                         labelStyle={{ color: 'white' }}
                         style={{ color: 'white' }}
-                        {...register('author', { required: true })}
+                        required
                     />
         
                     <MDBRow className="mb-4">
                         <MDBCol xs="12" md="5" className="mb-md-0 mb-4">
                             <div className="bg-secondary rounded-5 p-3" style={{ width: '100%' }}>
                                 <h5 className="mb-3">Tags</h5>
-                                {data?.tags.map((val, idx) => (
+                                {tags?.map((val, idx) => (
                                     <div key={idx} className="mb-3">
                                         <MDBCheckbox
-                                            name={'tags.' + val}
-                                            id={val}
-                                            label={val.char(0).toUpperCase() + val.substring(1)}
-                                            checked={true}
+                                            name={'tags.' + val.name}
+                                            id={val.name}
+                                            label={val.name.charAt(0).toUpperCase() + val.name.substring(1)}
+                                            checked={val.checked}
+                                            onClick={() => { setTags(tags.map(ele => {
+                                                if (ele.name == val.name) {
+                                                    return {name: ele.name, checked: !ele.checked};
+                                                }
+                                                return ele;
+                                            })) }}
                                         />
                                     </div>
                                 ))}
@@ -88,34 +130,36 @@ export default function UpdateForm() {
                                     type="date"
                                     id="date"
                                     className="form-control"
-                                    value={data?.date}
+                                    value={date?new Date(date).toISOString().split('T')[0]:""}
+                                    onChange={(e) => { setDate(e.target.value)} }
                                     required
                                     style={{ width: '100%' }}
                                 />
                             </div>
-                            </MDBCol>
-                        </MDBRow>
+                        </MDBCol>
+                    </MDBRow>
         
-                        <MDBTextArea
-                            className="mb-8"
-                            label="Content"
-                            id="content"
-                            labelStyle={{ color: 'white' }}
-                            style={{ color: 'white', width: '100%' }}
-                            value={data?.content}
-                            required
-                            rows={4}
-                        />
-        
-                        <div className="d-flex justify-content-center">
-                            <MDBBtn
-                                className="mb-2"
-                                type="submit"
-                                style={{ fontSize: '1rem', padding: '0.5rem 3rem', textTransform: 'none' }}
-                            >
-                                {"Update" + type.charAt(0).toUpperCase() + type.substring(1)}
-                            </MDBBtn>
-                        </div>
+                    <MDBTextArea
+                        className="mb-8"
+                        label="Content"
+                        id="content"
+                        labelStyle={{ color: 'white' }}
+                        style={{ color: 'white', width: '100%' }}
+                        value={content}
+                        onChange={(e) => { setContent(e.target.value) }}
+                        required
+                        rows={4}
+                    />
+    
+                    <div className="d-flex justify-content-center">
+                        <MDBBtn
+                            className="mb-2"
+                            type="submit"
+                            style={{ fontSize: '1rem', padding: '0.5rem 3rem', textTransform: 'none' }}
+                        >
+                            {"Update " + type.charAt(0).toUpperCase() + type.substring(1)}
+                        </MDBBtn>
+                    </div>
                 </form>
             </MDBContainer>
         </MDBContainer>

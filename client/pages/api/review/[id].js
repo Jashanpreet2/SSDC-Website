@@ -15,7 +15,7 @@ export default async function handler(req, res) {
                 break;
             case 'PUT':
                 await putReviewById(id, req.body);
-                res.status(200).json({ message: `Review Updated` });
+                res.status(200).end();
                 break;
             case 'DELETE':
                 await deleteReviewById(id);
