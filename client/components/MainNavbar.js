@@ -46,9 +46,9 @@ export default function MainNavbar({ currentPage }) {
               <MDBNavbarItem>
                 <MDBNavbarLink href="/news">News</MDBNavbarLink>
               </MDBNavbarItem>
-              <MDBNavbarItem>
+              {/* <MDBNavbarItem>
                 <MDBNavbarLink href="/projects">Projects</MDBNavbarLink>
-              </MDBNavbarItem>
+              </MDBNavbarItem> */}
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBContainer>
