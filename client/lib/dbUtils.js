@@ -15,6 +15,7 @@ const NewsAndEventSchema = new Schema({
     type: String,
     required: true,
   },
+  imageUrl: { type: String, required: true },
 })
 
 // Project
@@ -100,6 +101,7 @@ export function postNews(data) {
     tags: [...data.tags],
     date: data.date,
     content: data.content,
+    imageUrl: data.imageUrl,
   })
   return news.save()
 }
@@ -111,6 +113,7 @@ export function postEvent(data) {
     tags: [...data.tags],
     date: data.date,
     content: data.content,
+    imageUrl: data.imageUrl,
   })
   return event.save()
 }

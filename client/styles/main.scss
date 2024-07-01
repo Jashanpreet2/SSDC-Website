@@ -108,3 +108,36 @@
 .icon-list {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+.full-width-section {
+  width: 100vw;
+  margin-top: -26px;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-width-section h1 {
+  position: relative;
+  z-index: 1;
+}

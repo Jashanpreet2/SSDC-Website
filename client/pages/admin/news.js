@@ -16,20 +16,21 @@ const CreateNewsArticle = () => {
   const [date, setDate] = useState('')
   const [content, setContent] = useState('')
   const [tags, setTags] = useState({ news: false, update: false })
+  const [imageUrl, setImageUrl] = useState('')
 
   const submitForm = async (data) => {
     let enabledTags = []
     for (let key in tags) {
       if (tags[key] == true) enabledTags.push(key)
     }
-    console.log('Form Submitted', { ...data, date, content, tags: enabledTags })
+
     try {
       const res = await fetch('/api/news', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, date, content, tags: enabledTags }),
+        body: JSON.stringify({ ...data, date, content, tags: enabledTags, imageUrl }),
       })
 
       if (res.ok) {
@@ -37,6 +38,7 @@ const CreateNewsArticle = () => {
         reset({
           heading: '',
           author: '',
+          imageUrl: '',
         })
         setContent('')
         setDate('')
@@ -124,6 +126,24 @@ const CreateNewsArticle = () => {
                   onChange={(e) => setDate(e.target.value)}
                   required
                   style={{ width: '100%' }}
+                />
+              </div>
+
+              <div className="mb-2" style={{ width: '100%' }}>
+                <MDBInput
+                  label="Image URL"
+                  id="imageUrl"
+                  className="form-control"
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  style={{ width: '100%' }}
+                  labelStyle={{ color: 'white' }}
+                  {...register('imageUrl', {
+                    required: false,
+                    pattern: {
+                      value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
+                      message: 'Please enter a valid URL',
+                    },
+                  })}
                 />
               </div>
             </MDBCol>

@@ -1,13 +1,12 @@
-// pages/news/[id].js
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { MDBContainer, MDBIcon, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
+import { MDBContainer, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
 import Hero from '@/components/Hero'
 import IconList from '@/components/IconList'
 import { formatDate } from '@/lib/dateUtils'
 
-export default function Event({ news }) {
+export default function News({ news }) {
   const router = useRouter()
   const formattedDate = formatDate(news.date)
   return (

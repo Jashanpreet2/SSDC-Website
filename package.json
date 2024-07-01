@@ -1,0 +1,12 @@
+{
+  "name": "ssdc-website",
+  "version": "1.0.0",
+  "description": "Download Ollama from here https://github.com/ollama/ollama?tab=readme-ov-file\r Then start the LLM phi3:mini in command prompt using \"ollama run phi3:mini\"",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "cd client && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,25 +1,17 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import {
   MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardImage,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBBtn,
-  MDBIcon,
   MDBDropdown,
   MDBDropdownMenu,
   MDBDropdownToggle,
   MDBDropdownItem,
+  MDBBtn,
 } from 'mdb-react-ui-kit'
 import IconList from '@/components/IconList'
+import EventList from '@/components/EventList'
 
-export default function Events() {
+export default function Events({ event }) {
   const [events, setEvents] = useState([])
   const [filter, setFilter] = useState('All')
   const [filterText, setFilterText] = useState('Filter by')
@@ -65,19 +57,15 @@ export default function Events() {
   return (
     <>
       <Head>
-        <title>Discover our events</title>
+        <title>SSDC Website - Events</title>
+        <meta
+          name="description"
+          content="Stay updated with our latest events. This website is run by ssdc seneca"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
       <MDBContainer fluid className="p-0">
-        <div
-          className="d-flex justify-content-center align-items-center mb-5"
-          style={{
-            height: '400px',
-            backgroundColor: '#D9D9D9',
-            width: '100%',
-          }}
-        >
-          <h1 className="mb-5 text-center">&quot;Discover our events&quot;</h1>
-        </div>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2>Upcoming Events ...</h2>
           <MDBDropdown>
@@ -97,33 +85,7 @@ export default function Events() {
             </MDBDropdownMenu>
           </MDBDropdown>
         </div>
-        <MDBRow className="row-cols-1 row-cols-md-2 g-4 mb-8">
-          {filteredEvents.slice(0, visibleEvents).map((event) => (
-            <MDBCol key={event._id}>
-              <MDBCard>
-                <MDBCardImage
-                  src="https://via.placeholder.com/300x200"
-                  position="top"
-                  alt={event.heading}
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>{event.heading}</MDBCardTitle>
-                  <MDBCardText className="text-truncate" style={{ maxWidth: '100%' }}>
-                    <small className="text-muted">
-                      {new Date(event.date).toLocaleDateString()}
-                    </small>
-                    <br />
-                    <br />
-                    {event.content}
-                  </MDBCardText>
-                  <Link href={`/event/${event._id}`} passHref>
-                    <MDBBtn color="primary">More Details</MDBBtn>
-                  </Link>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-          ))}
-        </MDBRow>
+        <EventList events={filteredEvents} visibleEvents={visibleEvents} />
         {visibleEvents < filteredEvents.length && (
           <div className="mb-8 mt-4 text-center">
             <MDBBtn
@@ -144,4 +106,19 @@ export default function Events() {
       <IconList />
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`${process.env.API_ENDPOINT}/api/event`)
+  const event = await res.json()
+
+  if (!event) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { event },
+  }
 }
