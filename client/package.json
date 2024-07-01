@@ -23,7 +23,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.0",
-    "react-simple-star-rating": "^5.1.7"
+    "react-simple-star-rating": "^5.1.7",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "eslint": "^8",

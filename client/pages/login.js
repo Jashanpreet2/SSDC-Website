@@ -36,7 +36,7 @@ export default function Login() {
             });
             if (res.ok) {
                 setError('');
-                router.push('admin/event');
+                router.push('/admin/');
             } else {
                 setError('User name and/or Password entered is not correct');
             }
