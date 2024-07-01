@@ -37,25 +37,14 @@ export default function ChatBotToggler() {
         ifUser: false,
       }
       setChats([...chats, userChat, chatBotChat])
-      // console.log(ques);
-      // console.log(chats);
       setQues('')
     }
   }
 
   return (
     <>
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol></MDBCol>
-          <MDBCol>
-            <MDBBtn
+      <div className='chatbox-container'>
+      <MDBBtn
               onClick={() => setScrollableModal(!scrollableModal)}
               size="lg"
               tag="a"
@@ -65,11 +54,7 @@ export default function ChatBotToggler() {
             >
               <MDBIcon fas icon="robot" />
             </MDBBtn>
-            <br />
-            <br />
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+      </div>
       <MDBModal open={scrollableModal} onClose={() => setScrollableModal(false)} tabIndex="-1">
         <MDBModalDialog scrollable>
           <MDBModalContent>
