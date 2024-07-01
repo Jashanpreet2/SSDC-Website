@@ -1,39 +1,9 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { MDBContainer, MDBIcon, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
-import { useState, useEffect } from 'react'
+import { MDBContainer, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
+import IconList from '@/components/IconList'
 
-export default function Event() {
-  const router = useRouter()
-  const { id } = router.query
-  const [event, setEvent] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (id) {
-      setLoading(true)
-      fetch(`/api/event/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setEvent(data)
-          setLoading(false)
-        })
-        .catch((error) => {
-          console.error('Error fetching event:', error)
-          setLoading(false)
-        })
-    }
-  }, [id])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (!event) {
-    return <div>Event not found</div>
-  }
-
+export default function Event({ event }) {
   return (
     <>
       <Head>
@@ -95,28 +65,23 @@ export default function Event() {
           </div>
         </MDBCol>
       </MDBContainer>
-      <hr />
-      <footer className="mt-5 text-center">
-        <p>Follow us to learn more</p>
-        <div>
-          <a
-            href="https://www.linkedin.com/company/example"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MDBIcon fab icon="linkedin-in" size="2x" className="me-4" />
-          </a>
-          <a href="https://discord.gg/example" target="_blank" rel="noopener noreferrer">
-            <MDBIcon fab icon="discord" size="2x" className="me-4" />
-          </a>
-          <a href="https://www.instagram.com/example" target="_blank" rel="noopener noreferrer">
-            <MDBIcon fab icon="instagram" size="2x" className="me-4" />
-          </a>
-          <a href="https://www.youtube.com/user/example" target="_blank" rel="noopener noreferrer">
-            <MDBIcon fab icon="youtube" size="2x" className="me-4" />
-          </a>
-        </div>
-      </footer>
+      <IconList />
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { id } = context.params
+  const res = await fetch(`${process.env.API_ENDPOINT}/api/event/${id}`)
+  const event = await res.json()
+
+  if (!event) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { event },
+  }
 }

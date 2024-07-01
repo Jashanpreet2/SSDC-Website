@@ -69,6 +69,14 @@ export default function MainNavbar({ currentPage }) {
           subHead="Stay updated with the latest news from our club."
         />
       )}
+      {currentPage == 'Events' && (
+        <Hero
+          imgUrl="https://www.senecapolytechnic.ca/content/seneca/futurestudents/events-and-webinars/_jcr_content/root/responsivegrid/pre-content/top_feature_copy/1.img.Open-House-Newnham-2022-11-26-085.jpg"
+          action=""
+          head="Discover Our Latest Events!"
+          subHead="Stay updated with the latest events from our club."
+        />
+      )}
     </header>
   )
 }
