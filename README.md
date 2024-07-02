@@ -14,7 +14,7 @@ pip install -r requirements.txt     (Installs the dependencies listed in the req
 Navigate to client folder
 npm i                               (Installs the dependencies)
 
-## Start the client and chatbot servers
+## 4. Start the client and chatbot servers
 Navigate to chatbot folder
 flask --app main run
 
@@ -22,3 +22,17 @@ Navigate to client folder
 npm run dev
 
 You can now access the application at localhost:3000
+
+# Routes
+1. /admin: Dashboard for updating or deleting events
+2. /admin/event: For adding an event
+3. /admin/news: For removing an event
+4. /: Home page
+5. /news: News page
+6. /news/[id]: Page of a news article
+7. /events: Events page
+8. /event/[id]: Page of an event
+
+# Important Info
+
+### 1. The AI chatbot will not work on the deployed website as the chatbot backend has not been hosted.
