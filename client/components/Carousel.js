@@ -5,7 +5,7 @@ export default function Carousel() {
     <MDBCarousel showControls showIndicators>
       <MDBCarouselItem itemId={1}>
         <img
-          src="https://media.licdn.com/dms/image/D5622AQFyMXIR9dkNYw/feedshare-shrink_2048_1536/0/1711043766361?e=1722470400&v=beta&t=dfCXX025obsD-X63BDzp0PF3gNPqkkwwPNIRVRi5L-k"
+          src="https://lawschooltoolbox.com/wp-content/uploads/2017/02/shutterstock_106223549.jpg"
           className="d-block h-10 w-100"
           alt="..."
           style={{objectFit: "cover", height: "572px"}}
